@@ -9,6 +9,8 @@ class Program
         admin.ManageUsers();
         Customer customer = new Customer("Покупатель", "frogot158@gmail.com", 100);
         VipCustomer vipCustomer = new VipCustomer("VIP Покупатель", "vip@gmail.com", 100);
+        customer.SetBalance(2000);
+        vipCustomer.SetBalance(5400);
         customer.DisplayInfo();
         vipCustomer.DisplayInfo();
         Product product1 = new Product("Телевизор", 500, "Электроника");
@@ -17,10 +19,7 @@ class Program
         customer.AddToCart(product1);
         customer.AddToCart(product2);
         customer.AddToCart(product3);
-        customer.SetBalance(2000);
         customer.PlaceOrder();
-        customer.SetBalance(150);
-        vipCustomer.SetBalance(200);
         vipCustomer.AddToCart(product1);
         vipCustomer.AddToCart(product2);
         vipCustomer.AddToCart(product3);

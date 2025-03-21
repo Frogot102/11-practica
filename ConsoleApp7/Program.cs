@@ -5,7 +5,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Admin admin = new Admin("Админ", "admin@example.com");
+        Admin admin = new Admin("Админ", "admin@example.com", 8000);
         admin.ManageUsers();
         Customer customer = new Customer("Покупатель", "frogot158@gmail.com", 100);
         VipCustomer vipCustomer = new VipCustomer("VIP Покупатель", "vip@gmail.com", 100);
@@ -17,12 +17,9 @@ class Program
         customer.AddToCart(product1);
         customer.AddToCart(product2);
         customer.AddToCart(product3);
-        customer.SetBalance(20);
+        customer.SetBalance(2000);
         customer.PlaceOrder();
         customer.SetBalance(150);
-        customer.PlaceOrder();
-        customer.RemoveFromCart(product2);
-        customer.PlaceOrder();
         vipCustomer.SetBalance(200);
         vipCustomer.AddToCart(product1);
         vipCustomer.AddToCart(product2);
@@ -36,12 +33,14 @@ class Program
 class User
 {
     public string name;
-    public string email; 
+    public string email;
+    public double balance;
 
-    public User(string name, string email)
+    public User(string name, string email, double balance)
     {
         this.name = name;
         this.email = email;
+        this.balance = balance;
     }
 
     public void DisplayInfo()
@@ -55,10 +54,9 @@ class Customer : User
     public double balance;
     public List<Product> cart = new List<Product>();
 
-    public Customer(string name, string email, double balance)
-        : base(name, email)
+    public Customer(string name, string email, double balance) : base(name, email, balance)
     {
-        double Balance = balance;
+        this.balance = balance;
     }
 
     public void SetBalance(double newBalance)
@@ -118,8 +116,7 @@ class VipCustomer : Customer
 {
     public double discountRate = 0.10;
 
-    public VipCustomer(string name, string email, double balance)
-        : base(name, email, balance) { }
+    public VipCustomer(string name, string email, double balance) : base(name, email, balance) { }
 
     public void PlaceOrder()
     {
@@ -156,7 +153,7 @@ class Product
     public Product(string name, double price, string category)
     {
         string Name = name;
-        double Price = price;
+        this.price = price;
         string Category = category;
     }
 
@@ -195,7 +192,7 @@ class Order
 
 class Admin : User
 {
-    public Admin(string name, string email) : base(name, email) { }
+    public Admin(string name, string email, double balance) : base(name, email, balance) { }
 
     public void ManageUsers()
     {
